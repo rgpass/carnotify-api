@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: carnotify_api_development
+  host: localhost
+  username: rgpass
+  password: password
+
+test:
+  <<: *default
+  database: carnotify_api_test
+  host: localhost
+  username: rgpass
+  password: password
+
+production:
+  <<: *default
+  encoding: unicode
+  database: carnotify_api_production
+  pool: 5
+  username: carnotify_api
+  password:
