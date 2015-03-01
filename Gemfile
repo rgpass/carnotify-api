@@ -37,3 +37,7 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
