@@ -1,6 +1,6 @@
 class Car
   def self.makes_by_year(year)
-    HTTParty.get("http://api.edmunds.com/api/vehicle/v2/makes?fmt=json&api_key=jfc7fztasc6vfbaqzmfnw484&year=#{year}")
+    HTTParty.get("http://api.edmunds.com/api/vehicle/v2/makes?fmt=json&api_key=jfc7fztasc6vfbaqzmfnw484&year=#{year}")['makes']
   end
 
   def self.maintenance_list_for_model_year_id(model_year_id)

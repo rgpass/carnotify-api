@@ -1,7 +1,6 @@
 class Api::V1::CarsController < ApplicationController
   def makes
-    edmunds_makes = Car.makes_by_year(params[:year])
-    render json: edmunds_makes, status: 200
+    @makes = Car.makes_by_year(params[:year])
   end
 
   def maintenance
