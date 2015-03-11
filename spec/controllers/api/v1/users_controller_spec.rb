@@ -27,6 +27,12 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(user_response[:email]).to eql @user_attributes[:email]
       end
 
+      it 'signs in users' do
+        user_response = json_response
+        digested_token = User.digest(response.cookies['remember_token'])
+        expect(digested_token).to eq user_response[:remember_token]
+      end
+
       it { should respond_with 201 }
     end
 

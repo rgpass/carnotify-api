@@ -7,8 +7,10 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    random_token = User.new_remember_token
+    user.remember_token = User.digest(random_token)
     if user.save
-      # Not sure what location does
+      sign_in user
       render json: user, status: 201#, location: [:api, user]
     else
       render json: { errors: user.errors }, status: 422
