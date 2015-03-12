@@ -43,5 +43,7 @@ module CarnotifyApi
     end
 
     config.autoload_paths += %W(\#{config.root}/lib)
+
+    config.api_only = false
   end
 end

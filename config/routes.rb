@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       get '/makes', to: 'cars#makes'
       get '/maintenance', to: 'cars#maintenance'
       resources :users
-      resources :sessions, only: [:create]
+      resources :sessions, only: [:create, :index]
       delete '/signout', to: 'sessions#destroy'
     end
   end
