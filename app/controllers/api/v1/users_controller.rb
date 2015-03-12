@@ -1,6 +1,10 @@
 class Api::V1::UsersController < ApplicationController
   respond_to :json
 
+  def index
+    render json: User.all, status: 200
+  end
+
   def show
     respond_with User.find(params[:id])
   end
