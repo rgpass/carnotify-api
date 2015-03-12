@@ -1,5 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
 
+  def index
+    render json: current_user, status: 200
+  end
+
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
