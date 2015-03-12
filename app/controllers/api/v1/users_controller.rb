@@ -1,6 +1,8 @@
 class Api::V1::UsersController < ApplicationController
   respond_to :json
 
+  before_action :signed_in_user, only: [:index]
+
   def index
     render json: User.all, status: 200
   end
@@ -40,5 +42,11 @@ class Api::V1::UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def signed_in_user
+      unless signed_in?
+        render json: { errors: 'Unauthorized' }, status: 403
+      end
     end
 end
