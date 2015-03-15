@@ -15,6 +15,6 @@ class Car
     maintenance_list = HTTParty.get(url)['actionHolder']
     maintenance_list.sort_by! { |item| item['intervalMileage'] }
     intervals = maintenance_list.map { |item| item['intervalMileage'] }.uniq
-    intervals.map { |interval| [{ mileage: interval, items: maintenance_list.select { |item| item['intervalMileage'] == interval } }] }
+    intervals.map { |interval| { mileage: interval, items: maintenance_list.select { |item| item['intervalMileage'] == interval } } }
   end
 end
