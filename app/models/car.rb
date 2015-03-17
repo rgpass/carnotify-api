@@ -16,8 +16,9 @@ class Car
   end
 
   def self.maintenance_by_model_year_id(model_year_id)
+    # model_year_id = 100522687 # 2008 Honda Accord
     url = "https://api.edmunds.com/v1/api/maintenance/actionrepository/findbymodelyearid?modelyearid=#{model_year_id}&fmt=json&api_key=jfc7fztasc6vfbaqzmfnw484"
-    maintenance_list = HTTParty.get(url)['actionHolder']
+    maintenance_list = HTTParty.get(url)['actionHolder'].delete_if { |item| item['intervalMileage'] == 0 }
     maintenance_list.sort_by! { |item| item['intervalMileage'] }
     intervals = maintenance_list.map { |item| item['intervalMileage'] }.uniq
     interval_summary = intervals.map { |interval| { mileage: interval, items: maintenance_list.select { |item| item['intervalMileage'] == interval }.uniq { |item| item['itemDescription'] } } }
